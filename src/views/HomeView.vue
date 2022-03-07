@@ -1,14 +1,33 @@
 <template>
   <div class="select-pokemon-page">
-    <img alt="pokemon" src="./../assets/logo-pixel.gif" />
-    <h1>Home Page</h1>
-    <div class="select-pokemon-content" />
+    <img src="./../assets/logo-pixel.gif" alt="pokémon" />
+    <div class="select-pokemon-content">
+      <pokemon-list
+        :pokemon-list="statePokemonDataList"
+        :favorites="stateFavoritePokemonList"
+        @deleteFavorite="deleteFavorite"
+        @addFavorite="addFavorite"
+      />
+      <summary-favorites
+        :pokemon-list="statePokemonDataList"
+        :favorites="stateFavoritePokemonList"
+        @addFavorite="addFavorite"
+        @eraseFavoritePokemonList="eraseFavoritePokemonList"
+      />
+    </div>
   </div>
 </template>
 
 <script>
+import PokemonList from "@/components/PokemonList";
+import SummaryFavorites from "@/components/SummaryFavorites";
 import { mapState, mapActions } from "vuex";
+
 export default {
+  components: {
+    PokemonList,
+    SummaryFavorites,
+  },
   computed: {
     ...mapState(["statePokemonDataList", "stateFavoritePokemonList"]),
   },
